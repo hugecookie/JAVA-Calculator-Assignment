@@ -31,12 +31,10 @@ public class App {
             double result = calculator.calculate(num1, num2, operator);
             System.out.println("결과: " + result);
 
-            // 연산 결과 삭제 여부 확인 (올바른 입력값만 허용)
+            // 연산 결과 삭제 여부 확인 (최신 결과만 삭제 가능)
             String deleteInput = getValidDeleteChoice(sc);
             if (deleteInput.equals("1")) {
                 calculator.removeLatestResult();
-            } else if (deleteInput.equals("2")) {
-                calculator.removeOldestResult();
             }
         }
 
@@ -77,18 +75,18 @@ public class App {
         }
     }
 
-    // 유효한 삭제 선택지 입력 받기 (잘못된 값 입력 시 다시 요청)
+    // 유효한 삭제 선택지 입력 받기 (최신 결과 삭제만 가능하도록 변경)
     private static String getValidDeleteChoice(Scanner sc) {
         while (true) {
-            System.out.print("저장된 결과를 삭제하시겠습니까? (1: 최신 삭제, 2: 가장 오래된 삭제, n: 삭제 안 함): ");
+            System.out.print("저장된 결과를 삭제하시겠습니까? (1: 최신 삭제, n: 삭제 안 함): ");
             String input = sc.nextLine().trim().toLowerCase();
 
-            // 유효한 입력값인지 확인
-            if (input.equals("1") || input.equals("2") || input.equals("n")) {
+            // "1" 또는 "n"만 허용
+            if (input.equals("1") || input.equals("n")) {
                 return input;
             }
 
-            System.out.println("⚠ 올바른 선택지를 입력하세요 (1, 2, n).");
+            System.out.println("⚠ 올바른 선택지를 입력하세요 (1, n).");
         }
     }
 }
