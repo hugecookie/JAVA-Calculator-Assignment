@@ -40,3 +40,6 @@ bin/
 # 로그 파일 제외
 logs/
 *.log
+
+# ✅ 연산 결과 파일 제외
+results.txt

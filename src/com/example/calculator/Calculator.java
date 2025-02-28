@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
  * - 최신 연산 결과를 스택(Stack)에 저장 (LIFO 방식)
  * - 연산 수행 및 결과 저장
  * - 특정 값보다 큰 연산 결과 필터링 (Stream 사용)
+ * - 모든 연산 기록 삭제 기능 추가
  */
 public class Calculator {
     private Stack<Double> results; // 최신 결과를 저장하는 스택 (LIFO - Last In First Out)
@@ -35,7 +36,7 @@ public class Calculator {
     }
 
     /**
-     * 최신 연산 결과 삭제 (LIFO 방식 - Stack 사용)
+     * ✅ 최신 연산 결과 삭제 (LIFO 방식 - Stack 사용)
      * - 스택이 비어 있지 않다면 가장 최근 저장된 연산 결과를 삭제
      * - 비어 있을 경우 메시지 출력
      */
@@ -49,7 +50,7 @@ public class Calculator {
     }
 
     /**
-     * 저장된 연산 결과 반환 (방어적 복사 적용)
+     * ✅ 저장된 연산 결과 반환 (방어적 복사 적용)
      * - Stack의 직접 접근을 방지하고, 새로운 Stack 객체로 복사하여 반환
      * - 원본 데이터가 변경되지 않도록 보장
      * @return 현재 저장된 연산 결과 목록 (Stack<Double>)
@@ -59,7 +60,7 @@ public class Calculator {
     }
 
     /**
-     * 특정 값보다 큰 연산 결과 조회 (Stream 활용)
+     * ✅ 특정 값보다 큰 연산 결과 조회 (Stream 활용)
      * - Stack 내부 데이터를 Stream으로 변환하여 필터링 수행
      * - Java 8 Stream API를 사용하여 특정 기준(threshold)보다 큰 값만 반환
      * @param threshold 기준이 되는 값
@@ -69,5 +70,14 @@ public class Calculator {
         return results.stream() // ✅ Stack을 Stream으로 변환
                 .filter(value -> value > threshold) // ✅ 특정 값보다 큰 값만 필터링
                 .collect(Collectors.toList()); // ✅ 결과를 List로 변환 후 반환
+    }
+
+    /**
+     * ✅ 모든 연산 기록 삭제 기능 추가
+     * - 저장된 연산 결과를 초기화하여 전체 기록 삭제
+     */
+    public void clearResults() {
+        results.clear(); // ✅ 스택 비우기
+        System.out.println("🗑 모든 연산 기록이 삭제되었습니다.");
     }
 }
