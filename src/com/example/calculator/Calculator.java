@@ -135,10 +135,16 @@ public class Calculator {
      */
     public void saveResultsToFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) {
-            for (Double result : results) {
-                writer.write(result.toString());
-                writer.newLine();
-            }
+            results.stream()
+                    .map(String::valueOf)  // ✅ Double을 String으로 변환
+                    .forEach(line -> {
+                        try {
+                            writer.write(line);
+                            writer.newLine();
+                        } catch (IOException e) {
+                            throw new UncheckedIOException(e);  // ✅ 예외를 래핑하여 처리
+                        }
+                    });
         } catch (IOException e) {
             System.out.println("⚠ 연산 결과 저장 중 오류 발생: " + e.getMessage());
         }
@@ -152,14 +158,17 @@ public class Calculator {
         if (!file.exists()) return;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                try {
-                    results.add(Double.parseDouble(line));
-                } catch (NumberFormatException e) {
-                    System.out.println("⚠ 잘못된 데이터 형식: " + line);
-                }
-            }
+            results = reader.lines()
+                    .map(line -> {
+                        try {
+                            return Double.parseDouble(line);
+                        } catch (NumberFormatException e) {
+                            System.out.println("⚠ 잘못된 데이터 형식: " + line);
+                            return null;  // 잘못된 데이터는 무시
+                        }
+                    })
+                    .filter(value -> value != null)  // null 값 제거
+                    .collect(Collectors.toList());  // 리스트로 변환
         } catch (IOException e) {
             System.out.println("⚠ 연산 결과 불러오기 중 오류 발생: " + e.getMessage());
         }
