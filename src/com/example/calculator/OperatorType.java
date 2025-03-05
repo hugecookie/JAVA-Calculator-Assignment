@@ -52,7 +52,7 @@ public enum OperatorType {
     public static String getAllSymbols() {
         StringBuilder symbols = new StringBuilder();
         for (OperatorType op : values()) {
-            if (symbols.length() > 0) {
+            if (!symbols.isEmpty()) {
                 symbols.append(", ");
             }
             symbols.append(op.getSymbol());

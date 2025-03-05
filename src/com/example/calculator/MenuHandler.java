@@ -22,7 +22,7 @@ public class MenuHandler {
         this.calculator = new Calculator(); // ✅ 기존 연산 기록 불러오기 포함
         this.searchAndSortService = new SearchAndSortService(calculator);
         this.sc = new Scanner(System.in);
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> saveResultsOnExit())); // ✅ 종료 시 자동 저장
+        Runtime.getRuntime().addShutdownHook(new Thread(this::saveResultsOnExit)); // ✅ 종료 시 자동 저장
     }
 
     /**
