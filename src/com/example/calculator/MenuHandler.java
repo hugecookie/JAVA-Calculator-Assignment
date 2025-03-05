@@ -150,13 +150,14 @@ public class MenuHandler {
      */
     private OperatorType getValidOperator() {
         while (true) {
-            System.out.print("사칙연산 기호를 입력하세요 (+, -, *, /): ");
+            // ✅ 동적으로 연산자 기호 출력
+            System.out.print("사칙연산 기호를 입력하세요 (" + OperatorType.getAllSymbols() + "): ");
             String input = sc.nextLine().trim();
 
             try {
                 return OperatorType.fromSymbol(input);
             } catch (IllegalArgumentException e) {
-                System.out.println("⚠ 올바른 연산자를 입력하세요 (+, -, *, /).");
+                System.out.println("⚠ 올바른 연산자를 입력하세요 (" + OperatorType.getAllSymbols() + ").");
             }
         }
     }

@@ -13,6 +13,9 @@ public class OperatorFactory {
             case SUBTRACT -> new SubtractionOperator();
             case MULTIPLY -> new MultiplicationOperator();
             case DIVIDE -> new DivisionOperator();
+            case POWER -> new PowerOperator();
+            case MODULO -> new ModuloOperator();
+            case FLOOR_DIV -> new FloorDivisionOperator();
         };
     }
 }

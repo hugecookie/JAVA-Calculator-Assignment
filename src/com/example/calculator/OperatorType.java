@@ -5,7 +5,10 @@ public enum OperatorType {
     ADD("+"),
     SUBTRACT("-"),
     MULTIPLY("*"),
-    DIVIDE("/");
+    DIVIDE("/"),
+    POWER("^"),
+    MODULO("%"),
+    FLOOR_DIV("//");
 
     private final String symbol; // 연산자를 문자열로 저장하는 필드
 
@@ -39,5 +42,21 @@ public enum OperatorType {
             }
         }
         throw new IllegalArgumentException("⚠ 지원하지 않는 연산자입니다: " + symbol);
+    }
+
+    /**
+     * getAllSymbols()
+     * 지원하는 모든 연산 기호를 문자열로 반환하는 메서드
+     * ex) "+, -, *, /, ^, %, //"
+     */
+    public static String getAllSymbols() {
+        StringBuilder symbols = new StringBuilder();
+        for (OperatorType op : values()) {
+            if (symbols.length() > 0) {
+                symbols.append(", ");
+            }
+            symbols.append(op.getSymbol());
+        }
+        return symbols.toString();
     }
 }
