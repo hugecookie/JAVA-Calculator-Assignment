@@ -3,6 +3,7 @@ package com.example.calculator;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.Comparator;
 
@@ -167,7 +168,7 @@ public class Calculator {
                             return null;  // 잘못된 데이터는 무시
                         }
                     })
-                    .filter(value -> value != null)  // null 값 제거
+                    .filter(Objects::nonNull)  // null 값 제거
                     .collect(Collectors.toList());  // 리스트로 변환
         } catch (IOException e) {
             System.out.println("⚠ 연산 결과 불러오기 중 오류 발생: " + e.getMessage());
