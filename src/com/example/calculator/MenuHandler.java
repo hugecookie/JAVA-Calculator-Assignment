@@ -30,7 +30,9 @@ public class MenuHandler {
      * - 사용자가 기능을 선택하면 해당 기능을 실행
      */
     public void start() {
-        while (true) {
+        String choice;
+
+        do {
             System.out.println("\n========= 계산기 프로그램 =========");
             System.out.println("1. 저장된 연산 결과 조회");
             System.out.println("2. 새로운 연산 수행");
@@ -40,23 +42,23 @@ public class MenuHandler {
             System.out.println("🚪 'exit' 입력 시 프로그램 종료");
             System.out.print("👉 원하시는 기능의 번호를 입력하세요: ");
 
-            String choice = sc.nextLine().trim();
+            choice = sc.nextLine().trim();
 
-            switch (choice) {
-                case "1" -> showResults(); // ✅ 저장된 연산 결과 조회
-                case "2" -> performCalculation(); // ✅ 새로운 연산 수행
-                case "3" -> deleteLatestResult(); // ✅ 최신 연산 결과 삭제
-                case "4" -> clearAllResults(); // ✅ 모든 연산 기록 삭제
-                case "5" -> searchAndSortService.searchAndSortMenu(sc); // ✅ 검색 및 정렬 기능 실행
-                case "exit" -> {
-                    System.out.println("🚪 계산기를 종료합니다.");
-                    sc.close();
-                    return;
+            if (!"exit".equalsIgnoreCase(choice)) {
+                switch (choice) {
+                    case "1" -> showResults();
+                    case "2" -> performCalculation();
+                    case "3" -> deleteLatestResult();
+                    case "4" -> clearAllResults();
+                    case "5" -> searchAndSortService.searchAndSortMenu(sc);
+                    default -> System.out.println("⚠ 올바른 번호를 입력하세요 (1~5 또는 'exit').");
                 }
-                default -> System.out.println("⚠ 올바른 번호를 입력하세요 (1~5 또는 'exit').");
             }
-        }
+        } while (!"exit".equalsIgnoreCase(choice));
+
+        System.out.println("🚪 계산기를 종료합니다.");
     }
+
 
     /**
      * ✅ 프로그램 종료 시 연산 기록을 자동 저장하는 기능
