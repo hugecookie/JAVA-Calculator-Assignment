@@ -1,12 +1,11 @@
 package com.example.calculator;
 
+import com.example.calculator.utils.FileHandler;
+
 import java.util.Scanner;
 
 /**
  * ✅ 사용자 입력 및 메뉴 관리 클래스
- * - 프로그램 실행, 사용자 입력 처리
- * - 검색 및 정렬 기능은 `SearchAndSortService`에서 수행
- * - 프로그램 종료 시 연산 기록 자동 저장
  */
 public class MenuHandler {
     private final Calculator calculator; // ✅ 계산기 객체 (연산 및 결과 저장)
@@ -27,11 +26,9 @@ public class MenuHandler {
 
     /**
      * ✅ 프로그램 실행 (메인 메뉴)
-     * - 사용자가 기능을 선택하면 해당 기능을 실행
      */
     public void start() {
         String choice;
-
         do {
             System.out.println("\n========= 계산기 프로그램 =========");
             System.out.println("1. 저장된 연산 결과 조회");
@@ -59,19 +56,17 @@ public class MenuHandler {
         System.out.println("🚪 계산기를 종료합니다.");
     }
 
-
     /**
      * ✅ 프로그램 종료 시 연산 기록을 자동 저장하는 기능
-     * - 사용자가 프로그램을 종료하면, `Calculator` 객체의 데이터를 파일에 저장
+     * - `Calculator`가 아닌 `FileHandler`를 통해 연산 기록 저장
      */
     private void saveResultsOnExit() {
-        calculator.saveResultsToFile(); // ✅ 연산 기록 저장
+        FileHandler.saveResultsToFile(calculator.getResults()); // ✅ FileHandler에서 연산 기록 저장
         System.out.println("💾 연산 기록이 저장되었습니다. 다음 실행 시 불러올 수 있습니다.");
     }
 
     /**
      * ✅ 저장된 연산 결과 조회
-     * - 현재까지 저장된 연산 결과를 출력
      */
     private void showResults() {
         System.out.println("\n📜 현재 저장된 연산 결과: " + calculator.getResults());
@@ -79,8 +74,6 @@ public class MenuHandler {
 
     /**
      * ✅ 새로운 연산 수행
-     * - 사용자가 두 개의 숫자와 연산자를 입력하면 계산 수행 후 결과 저장
-     * - 나눗셈의 경우 0으로 나누는 예외 처리 포함
      */
     private void performCalculation() {
         Number num1 = getValidNumber("첫 번째 숫자를 입력하세요 (또는 'exit' 입력 시 뒤로 가기): ");
@@ -108,7 +101,6 @@ public class MenuHandler {
 
     /**
      * ✅ 최신 연산 결과 삭제
-     * - 저장된 연산 결과 리스트에서 가장 마지막 결과를 삭제
      */
     private void deleteLatestResult() {
         calculator.removeLatestResult();
@@ -116,7 +108,6 @@ public class MenuHandler {
 
     /**
      * ✅ 모든 연산 기록 삭제
-     * - 저장된 연산 결과 리스트를 초기화
      */
     private void clearAllResults() {
         calculator.clearResults();
@@ -125,10 +116,6 @@ public class MenuHandler {
 
     /**
      * ✅ 숫자 입력 검증 메서드
-     * - 사용자가 숫자를 입력할 때 유효한 값인지 확인
-     * - 'exit' 입력 시 뒤로 가기 기능 포함
-     * @param prompt 사용자 입력 메시지
-     * @return 입력된 숫자 (`Number` 타입)
      */
     private Number getValidNumber(String prompt) {
         while (true) {
@@ -147,12 +134,9 @@ public class MenuHandler {
 
     /**
      * ✅ 연산자 입력 검증 메서드
-     * - 사용자가 올바른 사칙연산 기호를 입력했는지 확인
-     * @return 입력된 연산자 (`OperatorType` 타입)
      */
     private OperatorType getValidOperator() {
         while (true) {
-            // ✅ 동적으로 연산자 기호 출력
             System.out.print("사칙연산 기호를 입력하세요 (" + OperatorType.getAllSymbols() + "): ");
             String input = sc.nextLine().trim();
 
