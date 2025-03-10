@@ -1,4 +1,5 @@
 ### IntelliJ IDEA ###
+.idea/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
@@ -28,18 +29,18 @@ bin/
 ### Mac OS ###
 .DS_Store
 
-# Java 빌드 파일 제외
+### Java 빌드 파일 제외 ###
 *.class
 *.jar
 *.war
 *.ear
 
-# 환경 변수 파일 제외
+### 환경 변수 파일 제외 ###
 .env
 
-# 로그 파일 제외
+### 로그 파일 제외 ###
 logs/
 *.log
 
-# ✅ 연산 결과 파일 제외
+### ✅ 연산 결과 파일 제외 ###
 results.txt
