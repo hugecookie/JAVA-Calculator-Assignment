@@ -133,7 +133,7 @@ public class MenuHandler {
             System.out.print(prompt);
             String input = sc.nextLine().trim();
 
-            if (input.equalsIgnoreCase("exit")) return null;
+            if ("exit".equalsIgnoreCase(input)) return null;
 
             try {
                 return input.contains(".") ? Double.parseDouble(input) : Integer.parseInt(input);

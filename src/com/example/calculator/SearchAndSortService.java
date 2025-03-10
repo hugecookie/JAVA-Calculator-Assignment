@@ -57,7 +57,7 @@ public class SearchAndSortService {
             System.out.print("기준값을 입력하세요 ('n' 입력 시 뒤로 가기): ");
             String input = sc.nextLine().trim();
 
-            if (input.equalsIgnoreCase("n")) return;
+            if ("n".equalsIgnoreCase(input)) return;
 
             try {
                 double threshold = Double.parseDouble(input);
@@ -78,7 +78,7 @@ public class SearchAndSortService {
             System.out.print("기준값을 입력하세요 ('n' 입력 시 뒤로 가기): ");
             String input = sc.nextLine().trim();
 
-            if (input.equalsIgnoreCase("n")) return;
+            if ("n".equalsIgnoreCase(input)) return;
 
             try {
                 double target = Double.parseDouble(input);
@@ -98,7 +98,7 @@ public class SearchAndSortService {
         while (true) {
             System.out.print("최소값을 입력하세요 ('n' 입력 시 뒤로 가기): ");
             String minInput = sc.nextLine().trim();
-            if (minInput.equalsIgnoreCase("n")) return;
+            if ("n".equalsIgnoreCase(minInput)) return;
 
             System.out.print("최대값을 입력하세요: ");
             String maxInput = sc.nextLine().trim();
