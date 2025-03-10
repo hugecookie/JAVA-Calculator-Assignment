@@ -1,24 +1,30 @@
 package com.example.calculator;
 
-// ✅ 연산자 타입을 Enum으로 관리
-public enum OperatorType {
-    ADD("+"),
-    SUBTRACT("-"),
-    MULTIPLY("*"),
-    DIVIDE("/"),
-    POWER("^"),
-    MODULO("%"),
-    FLOOR_DIV("//");
+import com.example.calculator.operator.*;
+import com.example.calculator.operator.Operator;
 
-    private final String symbol; // 연산자를 문자열로 저장하는 필드
+/**
+ * ✅ OperatorType에 Operator 객체 추가하여 팩토리 패턴 제거
+ */
+public enum OperatorType {
+    ADD("+", new AdditionOperator()),
+    SUBTRACT("-", new SubtractionOperator()),
+    MULTIPLY("*", new MultiplicationOperator()),
+    DIVIDE("/", new DivisionOperator()),
+    POWER("^", new PowerOperator()),
+    MODULO("%", new ModuloOperator()),
+    FLOOR_DIV("//", new FloorDivisionOperator());
+
+    private final String symbol;
+    private final Operator operator;
 
     /**
      * 생성자
-     * OperatorType Enum이 생성될 때, 해당 기호를 저장함
-     * ex) ADD("+") → symbol 필드에 "+"가 저장됨
+     * OperatorType(Enum)이 생성될 때 연산 기호와 Operator 객체를 저장
      */
-    OperatorType(String symbol) {
+    OperatorType(String symbol, Operator operator) {
         this.symbol = symbol;
+        this.operator = operator;
     }
 
     /**
@@ -31,9 +37,17 @@ public enum OperatorType {
     }
 
     /**
+     * getOperator()
+     * 저장된 Operator 객체를 반환하는 메서드
+     * ex) OperatorType.ADD.getOperator() → AdditionOperator 객체
+     */
+    public Operator getOperator() {
+        return operator;
+    }
+
+    /**
      * fromSymbol()
-     * 문자열로 입력된 연산 기호를 OperatorType(Enum)으로 변환하는 메서드
-     * ex) fromSymbol("+") → OperatorType.ADD
+     * 문자열 기호를 OperatorType으로 변환하는 메서드
      */
     public static OperatorType fromSymbol(String symbol) {
         for (OperatorType op : values()) {
