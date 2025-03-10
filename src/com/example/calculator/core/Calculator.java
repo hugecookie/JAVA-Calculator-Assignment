@@ -1,4 +1,4 @@
-package com.example.calculator;
+package com.example.calculator.core;
 
 import com.example.calculator.utils.FileHandler;
 

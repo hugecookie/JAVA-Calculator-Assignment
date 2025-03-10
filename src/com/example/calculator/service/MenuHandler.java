@@ -1,5 +1,7 @@
-package com.example.calculator;
+package com.example.calculator.service;
 
+import com.example.calculator.core.Calculator;
+import com.example.calculator.core.OperatorType;
 import com.example.calculator.utils.FileHandler;
 
 import java.util.Scanner;

@@ -1,4 +1,6 @@
-package com.example.calculator;
+package com.example.calculator.core;
+
+import com.example.calculator.service.MenuHandler;
 
 /**
  * ✅ 메인 실행 클래스

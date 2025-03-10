@@ -1,4 +1,6 @@
-package com.example.calculator;
+package com.example.calculator.service;
+
+import com.example.calculator.core.Calculator;
 
 import java.util.List;
 import java.util.Scanner;
